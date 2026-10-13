@@ -35,6 +35,7 @@ spring:
               filters:
                 - PrefixPath=/api
                 - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
 
             - id: auth-route
               uri: ${USERS_SERVICE_URI:http://localhost:8083}
@@ -51,6 +52,7 @@ spring:
               filters:
                 - PrefixPath=/api
                 - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
 
             - id: analysis-route
               uri: ${ANALYSIS_SERVICE_URI:http://localhost:8084}
@@ -59,6 +61,7 @@ spring:
               filters:
                 - PrefixPath=/api
                 - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
 
             - id: statistics-route
               uri: ${STATISTICS_SERVICE_URI:http://localhost:8085}
@@ -67,3 +70,4 @@ spring:
               filters:
                 - PrefixPath=/api
                 - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
