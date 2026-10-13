@@ -16,6 +16,12 @@ spring:
   config:
     import: optional:file:.env[.properties]
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:keys/public.pem
+
   cloud:
     gateway:
       server:
