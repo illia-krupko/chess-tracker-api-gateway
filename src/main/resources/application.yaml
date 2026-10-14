@@ -1,3 +1,73 @@
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.servlet.function: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,gateway
+
 spring:
   application:
     name: ChessTrackerGateway
+
+  config:
+    import: optional:file:.env[.properties]
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:keys/public.pem
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+
+            - id: games-route
+              uri: ${GAME_SERVICE_URI:http://localhost:8082}
+              predicates:
+                - Path=/games/**
+              filters:
+                - PrefixPath=/api
+                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
+
+            - id: auth-route
+              uri: ${USERS_SERVICE_URI:http://localhost:8083}
+              predicates:
+                - Path=/auth/**
+              filters:
+                - PrefixPath=/api
+                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+
+            - id: users-route
+              uri: ${USERS_SERVICE_URI:http://localhost:8083}
+              predicates:
+                - Path=/users/**
+              filters:
+                - PrefixPath=/api
+                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
+
+            - id: analysis-route
+              uri: ${ANALYSIS_SERVICE_URI:http://localhost:8084}
+              predicates:
+                - Path=/analysis/**
+              filters:
+                - PrefixPath=/api
+                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
+
+            - id: statistics-route
+              uri: ${STATISTICS_SERVICE_URI:http://localhost:8085}
+              predicates:
+                - Path=/statistics/**
+              filters:
+                - PrefixPath=/api
+                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - AddUserId
