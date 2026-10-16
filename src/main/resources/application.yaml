@@ -1,7 +1,7 @@
 logging:
   level:
-    org.springframework.cloud.gateway: DEBUG
-    org.springframework.web.servlet.function: DEBUG
+    org.springframework.cloud.gateway: INFO
+    org.springframework.web.servlet.function: INFO
 
 management:
   endpoints:
