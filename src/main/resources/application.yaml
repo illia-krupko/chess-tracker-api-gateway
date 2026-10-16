@@ -3,12 +3,6 @@ logging:
     org.springframework.cloud.gateway: INFO
     org.springframework.web.servlet.function: INFO
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,gateway
-
 spring:
   application:
     name: ChessTrackerGateway
