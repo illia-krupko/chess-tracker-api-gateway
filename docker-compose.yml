@@ -1,0 +1,24 @@
+services:
+  gateway:
+    build: .
+    restart: on-failure
+    ports:
+      - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
+    env_file:
+      - .env
+    environment:
+      GAME_SERVICE_URI: ${GAME_SERVICE_URI:-http://game-service:8081}
+      USER_SERVICE_URI: ${USER_SERVICE_URI:-http://user-service:8081}
+      ANALYSIS_SERVICE_URI: ${ANALYSIS_SERVICE_URI:-http://analysis-service:8081}
+      STATISTICS_SERVICE_URI: ${STATISTICS_SERVICE_URI:-http://statistics-service:8081}
+
+    networks:
+      - gateway-user-service
+      - gateway-game-service
+
+networks:
+  gateway-user-service:
+    external: true
+
+  gateway-game-service:
+    external: true
