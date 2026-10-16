@@ -16,7 +16,7 @@ public final class UserIdFilterFunctions {
 
     }
 
-    public static HandlerFilterFunction<ServerResponse, ServerResponse> addUserId() {
+    public static HandlerFilterFunction<ServerResponse, ServerResponse> setUserId() {
         return (request, next) -> {
             Authentication authentication = SecurityContextHolder
                     .getContext()
