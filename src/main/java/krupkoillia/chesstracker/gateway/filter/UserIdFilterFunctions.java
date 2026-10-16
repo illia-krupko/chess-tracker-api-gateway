@@ -12,7 +12,9 @@ public final class UserIdFilterFunctions {
 
     private static final String USER_ID_HEADER_NAME = "X-User-Id";
 
-    private UserIdFilterFunctions() {}
+    private UserIdFilterFunctions() {
+
+    }
 
     public static HandlerFilterFunction<ServerResponse, ServerResponse> addUserId() {
         return (request, next) -> {
@@ -32,8 +34,8 @@ public final class UserIdFilterFunctions {
             }
 
             ServerRequest modifiedRequest = ServerRequest.from(request)
-                .headers(headers -> headers.set(USER_ID_HEADER_NAME, userId))
-                .build();
+                    .headers(headers -> headers.set(USER_ID_HEADER_NAME, userId))
+                    .build();
 
             return next.handle(modifiedRequest);
         };
