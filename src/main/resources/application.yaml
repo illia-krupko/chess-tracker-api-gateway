@@ -28,7 +28,7 @@ spring:
                 - Path=/games/**
               filters:
                 - PrefixPath=/api
-                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - SetRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
                 - AddUserId
 
             - id: auth-route
@@ -37,7 +37,7 @@ spring:
                 - Path=/auth/**
               filters:
                 - PrefixPath=/api
-                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - SetRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
 
             - id: users-route
               uri: ${USER_SERVICE_URI:http://localhost:8083}
@@ -45,7 +45,7 @@ spring:
                 - Path=/users/**
               filters:
                 - PrefixPath=/api
-                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - SetRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
                 - AddUserId
 
             - id: analysis-route
@@ -54,7 +54,7 @@ spring:
                 - Path=/analysis/**
               filters:
                 - PrefixPath=/api
-                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - SetRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
                 - AddUserId
 
             - id: statistics-route
@@ -63,5 +63,5 @@ spring:
                 - Path=/statistics/**
               filters:
                 - PrefixPath=/api
-                - AddRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
+                - SetRequestHeader=X-Gateway-Secret, ${SHARED_GATEWAY_SECRET}
                 - AddUserId
