@@ -2,6 +2,7 @@ services:
   gateway:
     build: .
     restart: on-failure
+    container_name: gateway
     ports:
       - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
     env_file:
@@ -15,10 +16,14 @@ services:
     networks:
       - gateway-user-service
       - gateway-game-service
+      - gateway-analysis-service
 
 networks:
   gateway-user-service:
     external: true
 
   gateway-game-service:
+    external: true
+
+  gateway-analysis-service:
     external: true
